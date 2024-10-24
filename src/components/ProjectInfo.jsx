@@ -1,60 +1,128 @@
-import React from 'react';
-import {View, Text, StyleSheet, ProgressBarAndroid} from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Platform, ProgressBarAndroid, ProgressViewIOS } from 'react-native';
 
-const ProjectInfo = () => (
-  <View style={styles.section}>
-    <Text style={styles.sectionTitle}>Project Info</Text>
-    <Text style={styles.description}>
-      At vero eos et accusamus et iusto odio dignissimos ducimus qui blandi...
-      <Text style={styles.seeMore}> See more</Text>
-    </Text>
-    <View style={styles.dateRow}>
-      <Text style={styles.dateText}>Start date</Text>
-      <Text style={styles.dateText}>End date</Text>
-    </View>
-    <View style={styles.dateRow}>
-      <Text style={styles.dateValue}>01/09/23</Text>
-      <Text style={styles.dateValue}>04/12/23</Text>
-    </View>
-    <View style={styles.progressRow}>
-      <Text style={styles.statusText}>Status</Text>
-      <View style={styles.progressBarWrapper}>
-        <ProgressBarAndroid
-          styleAttr="Horizontal"
-          color="#6BBE92"
-          progress={0.78}
-        />
-        <Text style={styles.progressPercentage}>78%</Text>
+const ProjectInfo = () => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const description = 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blandi...';
+
+  return (
+    <View style={styles.card}>
+      <Text style={styles.title}>Project Info</Text>
+      <Text style={styles.label}>Description</Text>
+
+      <Text style={styles.description}>
+        {isExpanded ? description : `${description.substring(0, 64)}...`}
+        {!isExpanded && (
+          <TouchableOpacity onPress={() => setIsExpanded(true)}>
+            <Text style={styles.seeMore}> See more</Text>
+          </TouchableOpacity>
+        )}
+      </Text>
+
+      <View style={styles.row}>
+        <View style={styles.column}>
+          <Text style={styles.label}>Start date</Text>
+          <Text style={styles.date}>01/09/23</Text>
+        </View>
+        <View style={styles.column}>
+          <Text style={styles.label}>End date</Text>
+          <Text style={styles.date}>04/12/23</Text>
+        </View>
+        <View style={styles.statusColumn}>
+          <Text style={styles.label}>Status</Text>
+          <View style={styles.progressContainer}>
+            {/* <View style={styles.progressBackground}> */}
+              {Platform.OS === 'android' ? (
+                <ProgressBarAndroid
+                  styleAttr="Horizontal"
+                  indeterminate={false}
+                  progress={0.78}
+                  color="#008545"
+                  style={styles.progressBar}
+                />
+              ) : (
+                <ProgressViewIOS
+                  progress={0.78}
+                  progressTintColor="#008545"
+                  style={styles.progressBar}
+                />
+              )}
+            </View>
+            <Text style={styles.percentage}>78%</Text>
+          </View>
+        </View>
       </View>
-    </View>
-  </View>
-);
+    // </View>
+  );
+};
 
 const styles = StyleSheet.create({
-  section: {
+  card: {
     backgroundColor: '#fff',
     padding: 16,
-    borderRadius: 8,
-    marginBottom: 16,
+    borderRadius: 12,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 8,
+    borderWidth:1,
+    borderColor:"#fff",
+    margin: 16,
+    marginBottom:-2,
   },
-  sectionTitle: {fontSize: 16, fontWeight: 'bold', marginBottom: 8},
-  description: {color: '#6D6D6D'},
-  seeMore: {color: '#007AFF'},
-  dateRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 8,
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 8,
+    color:'#02111A',
   },
-  dateText: {color: '#9E9E9E'},
-  dateValue: {fontWeight: 'bold'},
-  progressRow: {
+  label: {
+    fontSize: 14,
+    color: '#6A7175',
+    marginBottom: 4,
+  },
+  description: {
+    fontSize: 14,
+    color: '#4E585E',
+    marginBottom: 8,
+    lineHeight: 20, 
+  },
+  seeMore: {
+    color: '#f2994a', 
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+  row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     marginTop: 8,
   },
-  progressBarWrapper: {flexDirection: 'row', alignItems: 'center'},
-  progressPercentage: {marginLeft: 8},
+  column: {
+    flex: 1,
+  },
+  statusColumn: {
+    flex: 1.5,
+    alignItems: 'flex-end',
+  },
+  date: {
+    fontSize: 14,
+    color: '#333',
+  },
+  progressContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  progressBar: {
+    flex: 1,
+    height: 15,  
+    borderRadius: 10,  
+  },
+  percentage: {
+    fontSize: 14,
+    color: '#333',
+    marginLeft: 8,
+  },
 });
 
 export default ProjectInfo;

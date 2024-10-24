@@ -5,6 +5,7 @@ import TaskInfo from '../components/TaskInfo';
 import Checklist from '../components/Checklist';
 import LogExpense from '../components/LogExpense';
 import Users from '../components/Users';
+import CommentSection from '../components/Comment';
 
 
 const WireframesScreen = () => {
@@ -15,6 +16,7 @@ const WireframesScreen = () => {
       <Checklist />
       <LogExpense />
       <Users />
+      <CommentSection/>
     </ScrollView>
   );
 };

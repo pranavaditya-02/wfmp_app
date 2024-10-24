@@ -15,7 +15,7 @@ const MemberList = () => {
   return (
     <View style={styles.section}>
       <View style={styles.headerContainer}>
-        <Text style={styles.sectionTitle}>Members</Text>
+        <Text style={styles.sectionTitle}>Users</Text>
         <View style={styles.imageContainer}>
           {visibleMembers.map((item, index) => (
             <Image

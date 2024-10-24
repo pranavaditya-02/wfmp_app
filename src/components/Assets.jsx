@@ -1,42 +1,62 @@
+
 import React from 'react';
-import {View, Text, ScrollView, Image, StyleSheet} from 'react-native';
+import { View, Text, FlatList, Image, StyleSheet, Dimensions } from 'react-native';
+const { width } = Dimensions.get('window');
+const imageSize = width * 0.25; 
 
-const Assets = () => (
-  <View style={styles.section}>
-    <Text style={styles.sectionTitle}>Assets</Text>
-    <ScrollView horizontal={true} style={styles.assetScroll}>
-      <AssetItem name="JCB" imageUri="https://example.com/jcb.png" />
-      <AssetItem name="Asset Name" />
-      <AssetItem name="Laptop Dell" imageUri="https://example.com/laptop.png" />
-    </ScrollView>
-  </View>
-);
-
-const AssetItem = ({name, imageUri}) => (
-  <View style={styles.assetItem}>
-    {imageUri ? (
-      <Image source={{uri: imageUri}} style={styles.assetImage} />
-    ) : (
-      <Image
-        source={{uri: 'https://example.com/default.png'}}
-        style={styles.assetImage}
+const Asset = ({ assets }) => {
+  return (
+    <View style={styles.section}>
+      <Text style={styles.sectionTitle}>Assets</Text>
+      <FlatList
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        data={assets}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <View style={styles.assetContainer}>
+            <Image source={{ uri: item.image }} style={styles.assetImage} />
+            <Text style={styles.assetName}>{item.name}</Text>
+          </View>
+        )}
       />
-    )}
-    <Text>{name}</Text>
-  </View>
-);
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   section: {
     backgroundColor: '#fff',
-    padding: 16,
-    borderRadius: 8,
-    marginBottom: 16,
+    padding: 10,
+    borderRadius: 12,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowOffset: {width: 0, height: 2},
+    shadowRadius: 8,
+    borderWidth: 1,
+    borderColor: '#fff',
+    margin: 16,
+    marginBottom:-2,
   },
-  sectionTitle: {fontSize: 16, fontWeight: 'bold', marginBottom: 8},
-  assetScroll: {marginTop: 8},
-  assetItem: {alignItems: 'center', marginRight: 16},
-  assetImage: {width: 50, height: 50},
+  sectionTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#02111A',
+  },
+  assetContainer: {
+    alignItems: 'center',
+    marginRight: 20,
+    marginTop: 10, // Add space between the section title and images
+  },
+  assetImage: {
+    width: imageSize, // Responsive width based on screen size
+    height: imageSize, // Responsive height based on screen size
+    borderRadius: 12, // Rounded corners
+  },
+  assetName: {
+    marginTop: 5,
+    fontSize: 14,
+  },
 });
 
-export default Assets;
+export default Asset;
