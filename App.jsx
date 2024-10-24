@@ -15,6 +15,8 @@ const App = () => {
       <SafeAreaView style={styles.container}>
         <Stack.Navigator>
           <Stack.Screen name="ProjectInfo" component={ProjectInfoScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="WireFramesScreen" component={WireframesScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="DocumentsScreen" component={DocumentsScreen} options={{ headerShown: false }} />
         </Stack.Navigator>
       </SafeAreaView>
     </NavigationContainer>

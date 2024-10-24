@@ -1,5 +1,6 @@
 import React from 'react';
-import {ScrollView, StyleSheet, View, Text} from 'react-native';
+import { ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native'; // Import useNavigation
 import TaskDetails from '../components/TaskItem';
 import MemberList from '../components/Members';
 import AssetList from '../components/Assets';
@@ -9,58 +10,28 @@ import TitleCount from '../components/CardHeader';
 import RightArrow from '../assets/icons/RightArrow';
 
 const ProjectInfoScreen = () => {
- 
-  const assets = [
-    {
-      id: '1',
-      image:
-        'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQnWO0MEXw9N9NiBofPZ_Pg-IdPV7_-o_MxQ1AH6P573YyrqW9q',
-      name: 'JCB',
-    },
-    {
-      id: '2',
-      image:
-        'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQ6X6-3BvIYOqvWdUGLBVHMI-sd1PeBUtuwz2KsaB0tbm8cOHgH',
-      name: 'Asset Name',
-    },
-    {
-      id: '3',
-      image:
-        'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSZaTgVcCyqKcfCGL4iJKD5QBadf7u0NhWw52xZ_qRoGjPp49dL',
-      name: 'Laptop Dell',
-    },
-    {
-      id: '4',
-      image:
-        'https://m.media-amazon.com/images/I/61pc0xVMJBL._SX522_.jpg',
-      name: 'Laptop HP',
-    },
-    {
-      id: '5',
-      image:
-        'https://m.media-amazon.com/images/I/71HwYi43pUL._SX522_.jpg',
-      name: 'Toy Gun',
-    },
-    {
-      id: '6',
-      image:
-        'https://images-eu.ssl-images-amazon.com/images/I/81T3olLXpUL._AC_UL600_SR600,400_.jpg',
-      name: '',
-    },
-  ];
+  const navigation = useNavigation(); // Initialize navigation
+
+  const navigateToDocuments = () => {
+    navigation.navigate('DocumentsScreen'); // Navigate to DocumentsScreen
+  };
 
   return (
     <ScrollView style={styles.container}>
       <Header title="Metanus UI Design" />
       <ProjectInfoCard />
       <TaskDetails />
-      <MemberList members={MemberList} />
-      <AssetList assets={assets} />
-      <TitleCount
-        title="Documents"
-        badgeCount={26}
-        RightArrowIcon={RightArrow}
-      />
+      <MemberList members={[]} /* Replace with your members data */ />
+      <AssetList assets={[]} /* Replace with your assets data */ />
+
+      {/* Wrap TitleCount with TouchableOpacity for navigation */}
+      <TouchableOpacity onPress={navigateToDocuments}>
+        <TitleCount
+          title="Documents"
+          badgeCount={26}
+          RightArrowIcon={RightArrow}
+        />
+      </TouchableOpacity>
     </ScrollView>
   );
 };

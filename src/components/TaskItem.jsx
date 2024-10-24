@@ -1,10 +1,17 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native'; // Import useNavigation
 import RightArrow from '../assets/icons/RightArrow';
 import TitleCount from '../components/CardHeader';
 import CustomButton from '../components/CustomButton';
 
 const TaskItem = () => {
+  const navigation = useNavigation(); // Get the navigation object
+
+  const navigateToWireframes = () => {
+    navigation.navigate('WireFramesScreen'); // Navigate to the WireframesScreen
+  };
+
   return (
     <View style={styles.taskCard}>
       <View style={styles.headerRow}>
@@ -37,7 +44,15 @@ const TaskItem = () => {
           statusStyle: styles.statusCompleted,
         },
       ].map((task, index) => (
-        <View key={index} style={styles.taskRow}>
+        <TouchableOpacity
+          key={index}
+          style={styles.taskRow}
+          onPress={() => {
+            if (task.title === 'Wireframes') {
+              navigateToWireframes(); // Only navigate if the task is "Wireframes"
+            }
+          }}
+        >
           <View style={styles.taskInfo}>
             <Text style={styles.taskTitle}>{task.title}</Text>
             <Text style={styles.taskId}>
@@ -48,7 +63,7 @@ const TaskItem = () => {
             <Text style={task.statusStyle}>{task.status}</Text>
             <RightArrow style={styles.rightArrow} />
           </View>
-        </View>
+        </TouchableOpacity>
       ))}
     </View>
   );
@@ -61,12 +76,12 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     shadowColor: '#000',
     shadowOpacity: 0.1,
-    shadowOffset: {width: 0, height: 2},
+    shadowOffset: { width: 0, height: 2 },
     shadowRadius: 8,
     borderWidth: 1,
     borderColor: '#fff',
     margin: 16,
-    marginBottom:-2,
+    marginBottom: -2,
   },
   headerRow: {
     flexDirection: 'row',

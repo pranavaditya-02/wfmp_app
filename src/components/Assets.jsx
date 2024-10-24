@@ -1,22 +1,23 @@
-
 import React from 'react';
 import { View, Text, FlatList, Image, StyleSheet, Dimensions } from 'react-native';
+import assets from '../../data/assets.json'; // Ensure this path is correct based on your project structure
+
 const { width } = Dimensions.get('window');
 const imageSize = width * 0.25; 
 
-const Asset = ({ assets }) => {
+const Asset = () => {
   return (
     <View style={styles.section}>
       <Text style={styles.sectionTitle}>Assets</Text>
       <FlatList
         horizontal
         showsHorizontalScrollIndicator={false}
-        data={assets}
+        data={assets} // Use the imported assets JSON
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <View style={styles.assetContainer}>
             <Image source={{ uri: item.image }} style={styles.assetImage} />
-            <Text style={styles.assetName}>{item.name}</Text>
+            <Text style={styles.assetName}>{item.name || "Unnamed Asset"}</Text>
           </View>
         )}
       />
@@ -31,12 +32,12 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     shadowColor: '#000',
     shadowOpacity: 0.1,
-    shadowOffset: {width: 0, height: 2},
+    shadowOffset: { width: 0, height: 2 },
     shadowRadius: 8,
     borderWidth: 1,
     borderColor: '#fff',
     margin: 16,
-    marginBottom:-2,
+    marginBottom: -2,
   },
   sectionTitle: {
     fontSize: 16,
