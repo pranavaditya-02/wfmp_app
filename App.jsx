@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import ProjectInfoScreen from '../wfmp_app/src/screens/ProjectInfoScreen'; 
 import DocumentsScreen from './src/screens/DocumentsScreen';
+import WireframesScreen from './src/screens/WireframesScreen';
 
 const Stack = createStackNavigator();
 
@@ -13,7 +14,7 @@ const App = () => {
       <StatusBar barStyle="dark-content" backgroundColor="#F0F3F6" /> 
       <SafeAreaView style={styles.container}>
         <Stack.Navigator>
-          <Stack.Screen name="ProjectInfo" component={DocumentsScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="ProjectInfo" component={WireframesScreen} options={{ headerShown: false }} />
         </Stack.Navigator>
       </SafeAreaView>
     </NavigationContainer>

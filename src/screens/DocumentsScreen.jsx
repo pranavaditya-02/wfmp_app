@@ -1,22 +1,13 @@
-// src/screens/DocumentsScreen.js
 import React from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
 import FolderCard from '../components/FolderCard';
 import DocumentCard from '../components/DocumentCard';
-import Header from '../components/Header'; // Importing the header component
+import Header from '../components/Header';
+import folders from '../../data/folders.json';  // Adjust the path based on your project structure
+import documents from '../../data/documents.json'; // Adjust the path based on your project structure
 
-const folders = [
-  { id: '1', name: 'Folder 01', documents: '04 documents' },
-  { id: '2', name: 'Folder 02', documents: '02 documents' },
-  { id: '3', name: 'Folder 01', documents: '04 documents' },
-  { id: '4', name: 'Folder 02', documents: '02 documents' }
-];
-
-const documents = [
-  { id: '1', title: 'Document 02', date: '12/02/23' },
-  { id: '2', title: 'Document 03', date: '10/01/23' },
-  { id: '3', title: 'Document 04', date: '24/01/23' }
-];
+// Function to format the count (adds leading zero if < 9)
+const formatCount = (count) => count.toString().padStart(2, '0');
 
 const DocumentsScreen = () => {
   return (
@@ -25,7 +16,7 @@ const DocumentsScreen = () => {
       <Header title="Documents" /> 
 
       {/* Folder Section */}
-      <Text style={styles.sectionTitle}>04 Folders</Text>
+      <Text style={styles.sectionTitle}>{`${formatCount(folders.length)} Folders`}</Text>
       <FlatList
         data={folders}
         renderItem={({ item }) => <FolderCard folder={item} />}
@@ -35,7 +26,7 @@ const DocumentsScreen = () => {
       />
 
       {/* Document Section */}
-      <Text style={styles.sectionTitle}>03 Documents</Text>
+      <Text style={styles.sectionTitle}>{`${formatCount(documents.length)} Documents`}</Text>
       <FlatList
         data={documents}
         renderItem={({ item }) => <DocumentCard document={item} />}
@@ -56,10 +47,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginVertical: 10,
-    marginHorizontal:16,
-    color:"#4E585E"
+    marginHorizontal: 16,
+    color: "#4E585E",
   },
- 
 });
 
 export default DocumentsScreen;
