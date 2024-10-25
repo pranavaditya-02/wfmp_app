@@ -22,9 +22,10 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-     paddingHorizontal: 16,
     backgroundColor: '#f5f5f5',
-    height: 50, 
+    marginTop:30,
+    marginLeft:15,
+    marginBottom:10,
   },
   backButton: {
     width: 32,

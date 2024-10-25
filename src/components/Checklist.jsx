@@ -69,13 +69,18 @@ const Checklist = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
-    padding: 15,
-    marginVertical: 10,
-    borderRadius: 10,
+    backgroundColor: '#fff',
+    padding: 10,
+    borderRadius: 12,
     shadowColor: '#000',
     shadowOpacity: 0.1,
-    shadowRadius: 4,
+    shadowOffset: {width: 0, height: 2},
+    shadowRadius: 8,
+    borderWidth: 1,
+    borderColor: '#fff',
+    margin: 16,
+    marginBottom:-2,
+
     
   },
   title: {

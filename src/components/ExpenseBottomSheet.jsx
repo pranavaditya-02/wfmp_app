@@ -14,6 +14,8 @@ import Downarrowicon from '../assets/icons/DownArrow';
 import CalendarIcon from '../assets/icons/CalenderIcon';
 import ShareIcon from '../assets/icons/Upload';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import * as DocumentPicker from 'react-native-document-picker';
+
 
 const ExpenseBottomSheet = ({ visible, onClose, onSubmit }) => {
   const [expenseName, setExpenseName] = useState('');
@@ -23,6 +25,7 @@ const ExpenseBottomSheet = ({ visible, onClose, onSubmit }) => {
   const [category, setCategory] = useState('Education');
   const [isCurrencyDropdownVisible, setIsCurrencyDropdownVisible] = useState(false);
   const [showDatePicker, setShowDatePicker] = useState(false);
+  const [uploadedFile, setUploadedFile] = useState(null);
 
   const handleSubmit = () => {
     if (!expenseName || !expenseAmount) {
@@ -36,6 +39,7 @@ const ExpenseBottomSheet = ({ visible, onClose, onSubmit }) => {
       amount: expenseAmount,
       currency,
       category,
+      file: uploadedFile,
     };
     onSubmit(expense);
     resetForm();
@@ -47,6 +51,22 @@ const ExpenseBottomSheet = ({ visible, onClose, onSubmit }) => {
     setExpenseAmount('');
     setCurrency('AED');
     setCategory('Education');
+    setUploadedFile(null);
+  };
+
+  const handleFileUpload = async () => {
+    try {
+      const result = await DocumentPicker.pick({
+        type: [DocumentPicker.types.allFiles],
+      });
+      setUploadedFile(result[0]);
+    } catch (error) {
+      if (DocumentPicker.isCancel(error)) {
+        console.log('File selection was canceled');
+      } else {
+        console.error('File selection error:', error);
+      }
+    }
   };
 
   return (
@@ -144,7 +164,16 @@ const ExpenseBottomSheet = ({ visible, onClose, onSubmit }) => {
             </View>
           </View>
 
-          {/* Footer buttons */}
+          {/* Upload File Section */}
+          <View style={styles.uploadContainer}>
+            <TouchableOpacity style={styles.uploadButton} onPress={handleFileUpload}>
+              <ShareIcon />
+              <Text style={styles.uploadButtonText}>
+                {uploadedFile ? uploadedFile.name : 'Upload File'}
+              </Text>
+            </TouchableOpacity>
+          </View>
+
           <View style={styles.buttonRow}>
             <TouchableOpacity
               style={[styles.button, styles.cancelButton]}
@@ -164,7 +193,7 @@ const ExpenseBottomSheet = ({ visible, onClose, onSubmit }) => {
 };
 
 const styles = StyleSheet.create({
-  modalContainer: {
+ modalContainer: {
     flex: 1,
     justifyContent: 'flex-end',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
@@ -259,6 +288,28 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: 'white',
     fontWeight: 'bold',
+  },
+  uploadContainer: {
+    marginVertical: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%', // Increase to full width or set to a specific value
+  },
+  uploadButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 10,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: '#0C356A',
+    borderStyle: 'dotted', // Dotted border
+    width: '100%', // Adjust this to control the width as needed
+  },
+  uploadButtonText: {
+    marginLeft: 8,
+    color: 'black',
+    fontFamily: 'Poppins-Medium',
   },
 });
 

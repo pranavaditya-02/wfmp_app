@@ -102,16 +102,18 @@ const CommentSection = () => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
     backgroundColor: '#fff',
-    borderRadius: 10,
+    padding: 10,
+    borderRadius: 12,
     shadowColor: '#000',
     shadowOpacity: 0.1,
-    shadowRadius: 5,
-    elevation: 2,
-    flex: 1, 
-    marginTop:20,
-    marginBottom:20,
+    shadowOffset: {width: 0, height: 2},
+    shadowRadius: 8,
+    borderWidth: 1,
+    borderColor: '#fff',
+    margin: 16,
+    marginBottom:-2,
+
   },
   title: {
     fontSize: 16,

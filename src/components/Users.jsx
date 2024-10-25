@@ -42,14 +42,18 @@ const MemberList = () => {
 
 const styles = StyleSheet.create({
   section: {
-   padding: 15,
-    borderRadius: 15,
-    borderWidth: 1,
-    borderColor: "#fff",
     backgroundColor: '#fff',
-    height: 80,
-    marginTop:10,
-    width: 330,
+    padding: 10,
+    borderRadius: 12,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowOffset: {width: 0, height: 2},
+    shadowRadius: 8,
+    borderWidth: 1,
+    borderColor: '#fff',
+    margin: 16,
+    marginBottom:-2,
+
   },
   headerContainer: {
     flexDirection: 'row',
