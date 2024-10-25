@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginBottom: 16,
   },
-  sectionTitle: {fontSize: 16, fontWeight: 'bold', marginBottom: 8},
+  sectionTitle: {fontSize: 16,  fontFamily:'Poppins-Medium', marginBottom: 8},
   documentButton: {
     backgroundColor: '#007AFF',
     borderRadius: 20,

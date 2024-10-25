@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily:"Poppins-SemiBold",
     marginLeft: 12,
     color: '#333', 
   },

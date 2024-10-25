@@ -57,9 +57,11 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 16,
-    fontWeight: 'bold',
+    
+
     color: '#02111A',
     marginRight: 10,
+    fontFamily:'Poppins-SemiBold',
   },
   imageContainer: {
     flexDirection: 'row',
@@ -83,7 +85,7 @@ const styles = StyleSheet.create({
   },
   extraText: {
     color: '#02111A',
-    fontWeight: 'bold',
+    fontFamily:'Poppins-SemiBold',
     fontSize: 14,
   },
 });

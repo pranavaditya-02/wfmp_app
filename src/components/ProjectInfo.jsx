@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily: 'Poppins-SemiBold',
     marginBottom: 8,
     color:'#02111A',
   },
@@ -80,17 +80,21 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#6A7175',
     marginBottom: 4,
+    fontFamily: 'Poppins-Medium',
   },
   description: {
     fontSize: 14,
     color: '#4E585E',
     marginBottom: 8,
     lineHeight: 20, 
+    fontFamily: 'Poppins-Medium',
   },
   seeMore: {
     color: '#f2994a', 
     fontSize: 14,
     fontWeight: 'bold',
+    fontFamily: 'Poppins-SemiBold',
+
   },
   row: {
     flexDirection: 'row',
@@ -108,6 +112,7 @@ const styles = StyleSheet.create({
   date: {
     fontSize: 14,
     color: '#333',
+    fontFamily: 'Poppins-Medium',
   },
   progressContainer: {
     flexDirection: 'row',

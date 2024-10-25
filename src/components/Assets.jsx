@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 16,
-    fontWeight: 'bold',
+  fontFamily:'Poppins-SemiBold',
     color: '#02111A',
   },
   assetContainer: {
@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
   assetName: {
     marginTop: 5,
     fontSize: 14,
+    fontFamily:'Poppins-Medium',
   },
 });
 

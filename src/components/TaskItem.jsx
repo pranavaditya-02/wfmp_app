@@ -86,9 +86,9 @@ const styles = StyleSheet.create({
   headerRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginLeft: -33,
-    marginTop: -20,
-    marginBottom: -30,
+   
+  
+    marginBottom: -20,
   },
   headerCount: {
     alignItems: 'center',
@@ -110,12 +110,13 @@ const styles = StyleSheet.create({
   taskTitle: {
     fontSize: 16,
     color: '#333',
-    fontWeight: '500',
+    fontFamily:'Poppins-Medium',
   },
   taskId: {
     fontSize: 12,
     color: '#777',
     marginTop: 4,
+    fontFamily:'Poppins-Medium',
   },
   statusRow: {
     flexDirection: 'row',
@@ -128,6 +129,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     fontSize: 12,
     marginRight: 8,
+    fontFamily:'Poppins-Medium',
   },
   statusInProgress: {
     color: '#FFA500',
@@ -136,6 +138,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     fontSize: 12,
     marginRight: 8,
+    fontFamily:'Poppins-Medium',
   },
   statusCompleted: {
     color: '#008545',
@@ -144,6 +147,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     fontSize: 12,
     marginRight: 8,
+    fontFamily:'Poppins-Medium',
   },
   rightArrow: {
     width: 20,

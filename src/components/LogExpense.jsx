@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     fontWeight: 'bold',
+    fontFamily:'Poppins-SemiBold',
     marginBottom: 10,
     color: "black",
   },
@@ -86,12 +87,14 @@ const styles = StyleSheet.create({
     color: '#4E585E',
     fontSize: 14,
     fontWeight: "500",
+    fontFamily:'Poppins-Medium',
   },
   expenseDate: {
     color: '#6A7175',
     fontSize: 12,
     marginVertical:0,
     marginHorizontal:5,
+    fontFamily:'Poppins-Medium',
   },
   addButton: {
     position: 'absolute',

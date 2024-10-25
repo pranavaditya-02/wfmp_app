@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Svg, { Path, Rect } from 'react-native-svg';
+import CardHeader from './CardHeader';
 
 const Checkbox = ({ checked }) => (
   <Svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -52,7 +53,7 @@ const Checklist = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Check list 04</Text>
+       <CardHeader title="Check list" badgeCount={items.length} />
       {items.map((item, index) => (
         <ChecklistItem
           key={index}
@@ -79,7 +80,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontFamily:'Poppins-SemiBold',
     marginBottom: 10,
     color: 'black',
   },
@@ -87,6 +88,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 10,
+    fontFamily:'Poppins-Medium',
   },
   itemText: {
     marginLeft: 10,

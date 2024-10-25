@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 16,
-    fontWeight: 'bold',
+   fontFamily:'Poppins-SemiBold',
     marginBottom: 10,
     color: "black"
   },
@@ -145,17 +145,19 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   name: {
-    fontWeight: 'bold',
+    fontFamily:'Poppins-SemiBold',
     color: "#02111A"
   },
   time: {
     color: 'gray',
     fontSize: 12,
+    fontFamily:'Poppins-Medium',
   },
   commentText: {
     marginTop: 5,
     color: "#4E585E",
     marginBottom:10,
+    fontFamily:'Poppins-Medium',
   },
   addCommentContainer: {
     flexDirection: 'row',
@@ -171,7 +173,8 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     height: 40,
-    color: "black"
+    color: "black",
+    fontFamily:'Poppins-Medium',
   },
   sendButton: {
     paddingHorizontal: 10,
@@ -179,6 +182,7 @@ const styles = StyleSheet.create({
   },
   sendButtonText: {
     color: '#007BFF',
+    fontFamily:'Poppins-Medium',
   },
 });
 

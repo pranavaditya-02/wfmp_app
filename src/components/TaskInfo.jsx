@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
   infoText: {
     fontSize: 16,
     color: '#000',
+    fontFamily:'Poppins-SemiBold',
   },
   statusButton: {
     backgroundColor: '#E0E0E0',
@@ -52,10 +53,12 @@ const styles = StyleSheet.create({
   },
   description: {
     marginVertical: 10,
+    fontFamily:'Poppins-Medium',
     color: '#333',
   },
   moreText: {
     color: '#FF9000',
+    fontFamily:'Poppins-Medium',
   },
   detailsRow: {
     flexDirection: 'row',
@@ -63,6 +66,7 @@ const styles = StyleSheet.create({
   },
   detail: {
     color: '#555',
+    fontFamily:'Poppins-Medium',
   },
 });
 
