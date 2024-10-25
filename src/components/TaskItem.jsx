@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
    
   
-    marginBottom: -20,
+    marginBottom: -30,
   },
   headerCount: {
     alignItems: 'center',
