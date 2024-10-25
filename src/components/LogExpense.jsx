@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   },
   expenseRow: {
     flexDirection: 'row',
-    justifyContent: 'space-between', // Align items to both ends
+   // Align items to both ends
     marginVertical: 10,
   },
   expenseName: {
@@ -90,6 +90,8 @@ const styles = StyleSheet.create({
   expenseDate: {
     color: '#6A7175',
     fontSize: 12,
+    marginVertical:0,
+    marginHorizontal:5,
   },
   addButton: {
     position: 'absolute',
