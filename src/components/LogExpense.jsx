@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
 import Svg, { Circle, Path } from 'react-native-svg';
 import ExpenseBottomSheet from './ExpenseBottomSheet'; // Make sure to import your ExpenseBottomSheet
 
@@ -18,34 +18,46 @@ const AddIcon = () => (
 
 const LogExpense = () => {
   const [isBottomSheetVisible, setBottomSheetVisible] = useState(false);
+  const [expenses, setExpenses] = useState([]);
 
   const toggleBottomSheet = () => {
     setBottomSheetVisible(!isBottomSheetVisible);
   };
 
+  const handleExpenseSubmit = (expense) => {
+    setExpenses(prevExpenses => [...prevExpenses, expense]);
+    toggleBottomSheet(); // Close the bottom sheet after submission
+  };
+
+  const renderSeparator = () => (
+    <View style={styles.separator} />
+  );
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Log expense 02</Text>
+      <Text style={styles.title}>Log expense</Text>
 
       <TouchableOpacity style={styles.addButton} onPress={toggleBottomSheet}>
         <AddIcon />
       </TouchableOpacity>
 
-      <View style={styles.expenseRow}>
-        <Text style={styles.expenseName}>Expense name</Text>
-        <Text style={styles.expenseDate}>• 04/09/23 • 1050 AED</Text>
-      </View>
-      <View style={styles.separator} />
-
-      <View style={styles.expenseRow}>
-        <Text style={styles.expenseName}>Note buying</Text>
-        <Text style={styles.expenseDate}>• 01/09/23 • 241 AED</Text>
-      </View>
+      <FlatList
+        data={expenses}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item }) => (
+          <View style={styles.expenseRow}>
+            <Text style={styles.expenseName}>{item.name}</Text>
+            <Text style={styles.expenseDate}>• {item.date.toLocaleDateString()} • {item.amount} {item.currency}</Text>
+          </View>
+        )}
+        ItemSeparatorComponent={renderSeparator} // Add separator component
+      />
 
       {/* Expense Bottom Sheet Modal */}
       <ExpenseBottomSheet 
-        isVisible={isBottomSheetVisible} 
+        visible={isBottomSheetVisible} 
         onClose={toggleBottomSheet} 
+        onSubmit={handleExpenseSubmit} // Pass the submit function
       />
     </View>
   );
@@ -67,17 +79,17 @@ const styles = StyleSheet.create({
   },
   expenseRow: {
     flexDirection: 'row',
-    margin: 10,
+    justifyContent: 'space-between', // Align items to both ends
+    marginVertical: 10,
   },
   expenseName: {
     color: '#4E585E',
     fontSize: 14,
-    fontWeight: "500"
+    fontWeight: "500",
   },
   expenseDate: {
     color: '#6A7175',
     fontSize: 12,
-    marginLeft: 10,
   },
   addButton: {
     position: 'absolute',
@@ -86,7 +98,7 @@ const styles = StyleSheet.create({
   },
   separator: {
     height: 1,
-    backgroundColor: '#E0E0E0',
+    backgroundColor: '#E0E0E0', // Color of the separator
     marginVertical: 5,
   },
 });
