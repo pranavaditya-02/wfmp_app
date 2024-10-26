@@ -1,7 +1,11 @@
-import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, FlatList} from 'react-native';
-import Svg, {Circle, Path} from 'react-native-svg';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
+import Svg, { Circle, Path } from 'react-native-svg';
+import { useSelector, useDispatch } from 'react-redux';
 import ExpenseBottomSheet from './ExpenseBottomSheet';
+import { addExpense } from '../../redux/expenseSlice';
+
+
 
 const AddIcon = () => (
   <Svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -18,18 +22,21 @@ const AddIcon = () => (
 
 const LogExpense = () => {
   const [isBottomSheetVisible, setBottomSheetVisible] = useState(false);
-  const [expenses, setExpenses] = useState([]);
+  const expenses = useSelector(state => state.expenses);
+  const dispatch = useDispatch();
 
   const toggleBottomSheet = () => {
     setBottomSheetVisible(!isBottomSheetVisible);
   };
 
-  const handleExpenseSubmit = expense => {
-    setExpenses(prevExpenses => [...prevExpenses, expense]);
+  const handleExpenseSubmit = (expense) => {
+    dispatch(addExpense(expense));
     toggleBottomSheet();
   };
 
-  const renderSeparator = () => <View style={styles.separator} />;
+  const renderSeparator = () => (
+    <View style={styles.separator} />
+  );
 
   return (
     <View style={styles.container}>
@@ -42,24 +49,22 @@ const LogExpense = () => {
       <FlatList
         data={expenses}
         keyExtractor={(item, index) => index.toString()}
-        renderItem={({item}) => (
+        renderItem={({ item }) => (
           <View style={styles.expenseRow}>
             <Text style={styles.expenseName}>{item.name}</Text>
-            <Text style={styles.expenseDate}>
-              • {item.date.toLocaleDateString()} • {item.amount} {item.currency}
-              {item.file && (
-                <Text style={styles.fileName}> • {item.file.name}</Text>
-              )}
-            </Text>
+            <Text style={styles.expenseDate}>• {item.date.toLocaleDateString()} • {item.amount} {item.currency}</Text>
+            {item.file && (
+              <Text style={styles.fileName}>File: {item.file.name}</Text>
+            )}
           </View>
         )}
-        ItemSeparatorComponent={renderSeparator}
+        ItemSeparatorComponent={renderSeparator} 
       />
 
-      <ExpenseBottomSheet
-        visible={isBottomSheetVisible}
-        onClose={toggleBottomSheet}
-        onSubmit={handleExpenseSubmit}
+      <ExpenseBottomSheet 
+        visible={isBottomSheetVisible} 
+        onClose={toggleBottomSheet} 
+        onSubmit={handleExpenseSubmit} 
       />
     </View>
   );

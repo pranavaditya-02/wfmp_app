@@ -5,11 +5,14 @@ import { createStackNavigator } from '@react-navigation/stack';
 import ProjectInfoScreen from '../wfmp_app/src/screens/ProjectInfoScreen'; 
 import DocumentsScreen from './src/screens/DocumentsScreen';
 import WireframesScreen from './src/screens/WireFramesScreen';
+import { Provider } from 'react-redux';
+import store from './redux/store';
 
 const Stack = createStackNavigator();
 
 const App = () => {
   return (
+    <Provider store={store}>
     <NavigationContainer>
       <StatusBar barStyle="dark-content" backgroundColor="#F0F3F6" /> 
       <SafeAreaView style={styles.container}>
@@ -20,6 +23,7 @@ const App = () => {
         </Stack.Navigator>
       </SafeAreaView>
     </NavigationContainer>
+    </Provider>
   );
 };
 

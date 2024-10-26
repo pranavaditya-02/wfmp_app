@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, FlatList, StyleSheet, Image, KeyboardAvoidingView, Platform } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
+import { useSelector, useDispatch } from 'react-redux'; 
+import { addComment } from '../../redux/commentActions';
 
 // List of random usernames
 const randomUsernames = ['Alice', 'Bob', 'Charlie', 'David', 'Eve', 'Frank', 'Grace', 'Hannah'];
@@ -13,37 +15,37 @@ const avatarUrls = [
 ];
 
 const CommentSection = () => {
-  const [comments, setComments] = useState([
-    { id: 1, name: 'Hamza', avatar: avatarUrls[0], text: 'harum quidem rerum facilis est...', time: '1 day ago' },
-    { id: 2, name: 'Mohammed', avatar: avatarUrls[1], text: 'Sure, Thanks', time: '12 hrs ago' }
-  ]);
+  const comments = useSelector((state) => state.comments?.comments || []);
+  const dispatch = useDispatch();
 
   const [newComment, setNewComment] = useState('');
 
-  // Function to generate a random username
+  useEffect(() => {
+    console.log('Comments changed:', comments);
+  }, [comments]);
+
+  const addNewComment = () => {
+    if (newComment.trim()) {
+      const newCommentObject = {
+        id: comments.length + 1,
+        name: generateRandomUsername(),
+        avatar: generateRandomAvatar(),
+        text: newComment,
+        time: 'Just now',
+      };
+      dispatch(addComment(newCommentObject));
+      setNewComment('');
+    }
+  };
+
   const generateRandomUsername = () => {
     const randomIndex = Math.floor(Math.random() * randomUsernames.length);
     return randomUsernames[randomIndex];
   };
 
-  // Function to generate a random avatar URL from the list
   const generateRandomAvatar = () => {
     const randomIndex = Math.floor(Math.random() * avatarUrls.length);
     return avatarUrls[randomIndex];
-  };
-
-  const addComment = () => {
-    if (newComment.trim()) {
-      const newCommentObject = {
-        id: comments.length + 1,
-        name: generateRandomUsername(), // Get a random username
-        avatar: generateRandomAvatar(), // Get a random avatar URL
-        text: newComment,
-        time: 'Just now'
-      };
-      setComments([newCommentObject, ...comments]);
-      setNewComment(''); // Clear the input after adding
-    }
   };
 
   const renderComment = ({ item }) => (
@@ -61,16 +63,11 @@ const CommentSection = () => {
 
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}
     >
       <Text style={styles.title}>Comments</Text>
-
-      {/* Dynamic height for the comment list */}
-      <View style={[
-        styles.commentListContainer, 
-        comments.length > 5 ? { maxHeight: 250 } : {} // Enforce scrolling if comments exceed 5
-      ]}>
+      <View style={[styles.commentListContainer, comments.length > 5 ? { maxHeight: 250 } : {}]}>
         <FlatList
           data={comments}
           renderItem={renderComment}
@@ -79,8 +76,6 @@ const CommentSection = () => {
           contentContainerStyle={{ paddingBottom: 20 }}
         />
       </View>
-
-      {/* Static Input Section */}
       <View style={styles.addCommentContainer}>
         <TextInput
           style={styles.input}
@@ -89,8 +84,7 @@ const CommentSection = () => {
           value={newComment}
           onChangeText={setNewComment}
         />
-        <TouchableOpacity onPress={addComment} style={styles.sendButton}>
-          {/* SVG Send Icon */}
+        <TouchableOpacity onPress={addNewComment} style={styles.sendButton}>
           <Svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" fill={"#4E585E"}>
             <Path d="M 5.4453125 4.0019531 A 1.50015 1.50015 0 0 0 4.109375 6.0644531 L 11.380859 24 L 4.109375 41.935547 A 1.50015 1.50015 0 0 0 6.1699219 43.841797 L 43.169922 25.341797 A 1.50015 1.50015 0 0 0 43.169922 22.658203 L 6.1699219 4.1582031 A 1.50015 1.50015 0 0 0 5.4453125 4.0019531 z M 8.3828125 8.6191406 L 39.146484 24 L 8.3828125 39.380859 L 14.011719 25.5 L 27.5 25.5 A 1.50015 1.50015 0 1 0 27.5 22.5 L 14.011719 22.5 L 8.3828125 8.6191406 z"></Path>
           </Svg>

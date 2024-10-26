@@ -22,6 +22,8 @@ const CardHeader = ({ title, badgeCount, RightArrowIcon }) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
+    //    paddingHorizontal: 16,
+    // paddingVertical:20, // Optional: Add horizontal padding
  
     borderRadius: 12,
     shadowColor: '#000',

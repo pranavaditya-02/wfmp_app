@@ -1,11 +1,20 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import { View, TouchableOpacity, StyleSheet } from 'react-native';
+// Import your TitleCount and RightArrow components/icons here
+// import TitleCount from './path/to/TitleCount';
+// import RightArrow from './path/to/RightArrow';
 
-const Documents = () => (
+const Documents = ({ badgeCount = 26, navigateToDocuments }) => (
   <View style={styles.section}>
-    <Text style={styles.sectionTitle}>Documents</Text>
-    <TouchableOpacity style={styles.documentButton}>
-      <Text style={styles.documentText}>26</Text>
+    <TouchableOpacity
+      onPress={navigateToDocuments}
+      style={styles.touchableContainer} // Style added for height control
+    >
+      <TitleCount
+        title="Documents"
+        badgeCount={badgeCount}
+        RightArrowIcon={RightArrow}
+      />
     </TouchableOpacity>
   </View>
 );
@@ -13,18 +22,23 @@ const Documents = () => (
 const styles = StyleSheet.create({
   section: {
     backgroundColor: '#fff',
-    padding: 16,
-    borderRadius: 8,
-    marginBottom: 16,
+    padding: 10,
+    borderRadius: 12,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 8,
+    borderWidth: 1,
+    borderColor: '#fff',
+    margin: 16,
+    marginBottom: -2,
+    height: 100,
+    justifyContent: 'center', // Centers the content vertically
   },
-  sectionTitle: {fontSize: 16,  fontFamily:'Poppins-Medium', marginBottom: 8},
-  documentButton: {
-    backgroundColor: '#007AFF',
-    borderRadius: 20,
-    paddingHorizontal: 12,
-    paddingVertical: 6,
+  touchableContainer: {
+    height: '100%', // Fills the section height
+    justifyContent: 'center', // Centers the content inside TouchableOpacity
   },
-  documentText: {color: '#fff'},
 });
 
 export default Documents;
