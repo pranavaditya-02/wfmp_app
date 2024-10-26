@@ -7,15 +7,12 @@ import AssetList from '../components/Assets';
 import Documents from '../components/Documents';
 import Header from '../components/Header';
 import ProjectInfoCard from '../components/ProjectInfo';
-import TitleCount from '../components/CardHeader';
-import RightArrow from '../assets/icons/RightArrow';
+
 
 const ProjectInfoScreen = () => {
-  const navigation = useNavigation(); // Initialize navigation
+  // Initialize navigation
 
-  const navigateToDocuments = () => {
-    navigation.navigate('DocumentsScreen'); // Navigate to DocumentsScreen
-  };
+  
 
   return (
     <ScrollView style={styles.container}>
@@ -26,16 +23,7 @@ const ProjectInfoScreen = () => {
       <AssetList assets={[]} /* Replace with your assets data */ />
 
       {/* TouchableOpacity with specific height */}
-      <TouchableOpacity
-        onPress={navigateToDocuments}
-        style={styles.touchableContainer} // Added style for height
-      >
-        <TitleCount
-          title="Documents"
-          badgeCount={26}
-          RightArrowIcon={RightArrow}
-        />
-      </TouchableOpacity>
+     <Documents/>
     </ScrollView>
   );
 };
