@@ -4,9 +4,9 @@ import Svg, { Path } from "react-native-svg";
 const DownArrow = (props) => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
-    width={props.width || 20}  // Default width is set to 20
-    height={props.height || 20} // Default height is set to 20
-    viewBox="0 0 512 380"
+    width={props.width || 15}  // Default width is set to 20
+    height={props.height || 15} // Default height is set to 20
+    viewBox="0 0 510 300"
     {...props}  // Pass down any additional props
   >
     <Path

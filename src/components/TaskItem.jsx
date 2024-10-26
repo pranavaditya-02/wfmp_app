@@ -1,28 +1,26 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native'; // Import useNavigation
+import { useNavigation } from '@react-navigation/native';
 import RightArrow from '../assets/icons/RightArrow';
-import TitleCount from '../components/CardHeader';
+import CardHeader from '../components/CardHeader';
 import CustomButton from '../components/CustomButton';
 
 const TaskItem = () => {
-  const navigation = useNavigation(); // Get the navigation object
+  const navigation = useNavigation();
 
   const navigateToWireframes = () => {
-    navigation.navigate('WireFramesScreen'); // Navigate to the WireframesScreen
+    navigation.navigate('WireFramesScreen');
   };
 
   return (
     <View style={styles.taskCard}>
+      {/* Row for CardHeader and CustomButton */}
       <View style={styles.headerRow}>
-        <TitleCount title="Task Details" badgeCount={3} />
-      </View>
-      <View style={styles.headerCount}>
-        <CustomButton label="All" />
+        <CardHeader title="Task Details" badgeCount={3} />
+        <CustomButton label="All" style={styles.customButton} />
       </View>
 
-      {[
-        {
+      {[{
           title: 'Wireframes',
           id: '0214',
           date: '05/09/23',
@@ -49,7 +47,7 @@ const TaskItem = () => {
           style={styles.taskRow}
           onPress={() => {
             if (task.title === 'Wireframes') {
-              navigateToWireframes(); // Only navigate if the task is "Wireframes"
+              navigateToWireframes();
             }
           }}
         >
@@ -81,20 +79,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#fff',
     margin: 16,
-    marginBottom: -2,
   },
   headerRow: {
     flexDirection: 'row',
     alignItems: 'center',
-   
-  
-    marginBottom: -30,
+    justifyContent: 'space-between',
+    marginBottom: -20,
+    marginTop:-20
   },
-  headerCount: {
-    alignItems: 'center',
-    marginLeft: 160,
-    marginTop: -40,
-  },
+ 
   taskRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -110,13 +103,13 @@ const styles = StyleSheet.create({
   taskTitle: {
     fontSize: 16,
     color: '#333',
-    fontFamily:'Poppins-Medium',
+    fontFamily: 'Poppins-Medium',
   },
   taskId: {
     fontSize: 12,
     color: '#777',
     marginTop: 4,
-    fontFamily:'Poppins-Medium',
+    fontFamily: 'Poppins-Medium',
   },
   statusRow: {
     flexDirection: 'row',
@@ -129,7 +122,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     fontSize: 12,
     marginRight: 8,
-    fontFamily:'Poppins-Medium',
+    fontFamily: 'Poppins-Medium',
   },
   statusInProgress: {
     color: '#FFA500',
@@ -138,7 +131,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     fontSize: 12,
     marginRight: 8,
-    fontFamily:'Poppins-Medium',
+    fontFamily: 'Poppins-Medium',
   },
   statusCompleted: {
     color: '#008545',
@@ -147,7 +140,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     fontSize: 12,
     marginRight: 8,
-    fontFamily:'Poppins-Medium',
+    fontFamily: 'Poppins-Medium',
   },
   rightArrow: {
     width: 20,

@@ -4,6 +4,7 @@ import Svg, { Circle, Path } from 'react-native-svg';
 import { useSelector, useDispatch } from 'react-redux';
 import ExpenseBottomSheet from './ExpenseBottomSheet';
 import { addExpense } from '../../redux/expenseSlice';
+import useExpenseStore from '../zustand/expenseStore';
 
 
 
@@ -22,15 +23,13 @@ const AddIcon = () => (
 
 const LogExpense = () => {
   const [isBottomSheetVisible, setBottomSheetVisible] = useState(false);
-  const expenses = useSelector(state => state.expenses);
-  const dispatch = useDispatch();
-
+  const { expenses, addExpense } = useExpenseStore(); 
   const toggleBottomSheet = () => {
     setBottomSheetVisible(!isBottomSheetVisible);
   };
 
   const handleExpenseSubmit = (expense) => {
-    dispatch(addExpense(expense));
+    addExpense(expense); 
     toggleBottomSheet();
   };
 
@@ -52,7 +51,7 @@ const LogExpense = () => {
         renderItem={({ item }) => (
           <View style={styles.expenseRow}>
             <Text style={styles.expenseName}>{item.name}</Text>
-            <Text style={styles.expenseDate}>• {item.date.toLocaleDateString()} • {item.amount} {item.currency}</Text>
+            <Text style={styles.expenseDate}>• {new Date(item.date).toLocaleDateString()} • {item.amount} {item.currency}</Text>
             {item.file && (
               <Text style={styles.fileName}>File: {item.file.name}</Text>
             )}

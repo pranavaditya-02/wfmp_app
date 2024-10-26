@@ -15,18 +15,47 @@ import CalendarIcon from '../assets/icons/CalenderIcon';
 import ShareIcon from '../assets/icons/Upload';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import * as DocumentPicker from 'react-native-document-picker';
+import useExpenseStore from '../zustand/expenseStore';
+import {pick} from 'react-native-document-picker';
 
 
-const ExpenseBottomSheet = ({ visible, onClose, onSubmit }) => {
+
+const ExpenseBottomSheet = ({visible, onClose, onSubmit}) => {
   const [expenseName, setExpenseName] = useState('');
   const [expenseDate, setExpenseDate] = useState(new Date());
   const [expenseAmount, setExpenseAmount] = useState('');
   const [currency, setCurrency] = useState('AED');
   const [category, setCategory] = useState('Education');
-  const [isCurrencyDropdownVisible, setIsCurrencyDropdownVisible] = useState(false);
+  const [isCurrencyDropdownVisible, setIsCurrencyDropdownVisible] =
+    useState(false);
   const [showDatePicker, setShowDatePicker] = useState(false);
+
   const [uploadedFile, setUploadedFile] = useState(null);
 
+  const handleFileUpload = async () => {
+    console.log('called');
+    try {
+      const [result] = await pick();
+      setUploadedFile(result);
+      console.log(result, 'res');
+    } catch (e) {
+      console.log(e, 'e');
+    }
+    // try {
+    //   const result = await DocumentPicker.pick({
+    //     type: [DocumentPicker.types.allFiles],
+    //   });
+    //   console.log(result, 'result')
+    //   // set({ uploadedFile: result[0] });
+    // } catch (error) {
+    //   if (DocumentPicker.isCancel(error)) {
+    //     console.log('File selection was canceled');
+    //   } else {
+    //     console.error('File selection error:', error);
+    //   }
+    // }
+  };
+  console.log(uploadedFile, 'uploadedFile');
   const handleSubmit = () => {
     if (!expenseName || !expenseAmount) {
       alert('Please fill in all fields');
@@ -51,22 +80,7 @@ const ExpenseBottomSheet = ({ visible, onClose, onSubmit }) => {
     setExpenseAmount('');
     setCurrency('AED');
     setCategory('Education');
-    setUploadedFile(null);
-  };
-
-  const handleFileUpload = async () => {
-    try {
-      const result = await DocumentPicker.pick({
-        type: [DocumentPicker.types.allFiles],
-      });
-      setUploadedFile(result[0]);
-    } catch (error) {
-      if (DocumentPicker.isCancel(error)) {
-        console.log('File selection was canceled');
-      } else {
-        console.error('File selection error:', error);
-      }
-    }
+    setUploadedFile(null); // Clear the uploaded file state
   };
 
   return (
@@ -98,7 +112,7 @@ const ExpenseBottomSheet = ({ visible, onClose, onSubmit }) => {
               <TextInput
                 placeholder="Enter date"
                 value={expenseDate.toLocaleDateString()}
-                style={[styles.input, { flex: 1 }]}
+                style={[styles.input, {flex: 1}]}
                 onFocus={() => setShowDatePicker(true)}
               />
               <TouchableOpacity onPress={() => setShowDatePicker(true)}>
@@ -123,13 +137,15 @@ const ExpenseBottomSheet = ({ visible, onClose, onSubmit }) => {
             <View style={styles.inputContainer1}>
               <Text style={styles.label}>Currency</Text>
               <TouchableOpacity
-                onPress={() => setIsCurrencyDropdownVisible(!isCurrencyDropdownVisible)}
+                onPress={() =>
+                  setIsCurrencyDropdownVisible(!isCurrencyDropdownVisible)
+                }
                 style={styles.row}>
                 <TextInput
                   placeholder="Currency"
                   value={currency}
                   editable={false}
-                  style={[styles.input, { flex: 1 }]}
+                  style={[styles.input, {flex: 1}]}
                 />
                 <Downarrowicon />
               </TouchableOpacity>
@@ -137,8 +153,8 @@ const ExpenseBottomSheet = ({ visible, onClose, onSubmit }) => {
                 <View style={styles.dropdown}>
                   <FlatList
                     data={['AED', 'INR', 'EUR']}
-                    keyExtractor={(item) => item}
-                    renderItem={({ item }) => (
+                    keyExtractor={item => item}
+                    renderItem={({item}) => (
                       <TouchableOpacity
                         onPress={() => {
                           setCurrency(item);
@@ -166,7 +182,9 @@ const ExpenseBottomSheet = ({ visible, onClose, onSubmit }) => {
 
           {/* Upload File Section */}
           <View style={styles.uploadContainer}>
-            <TouchableOpacity style={styles.uploadButton} onPress={handleFileUpload}>
+            <TouchableOpacity
+              style={styles.uploadButton}
+              onPress={handleFileUpload}>
               <ShareIcon />
               <Text style={styles.uploadButtonText}>
                 {uploadedFile ? uploadedFile.name : 'Upload File'}
@@ -191,7 +209,6 @@ const ExpenseBottomSheet = ({ visible, onClose, onSubmit }) => {
     </Modal>
   );
 };
-
 const styles = StyleSheet.create({
  modalContainer: {
     flex: 1,
