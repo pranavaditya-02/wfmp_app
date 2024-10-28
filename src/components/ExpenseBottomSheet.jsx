@@ -41,19 +41,7 @@ const ExpenseBottomSheet = ({visible, onClose, onSubmit}) => {
     } catch (e) {
       console.log(e, 'e');
     }
-    // try {
-    //   const result = await DocumentPicker.pick({
-    //     type: [DocumentPicker.types.allFiles],
-    //   });
-    //   console.log(result, 'result')
-    //   // set({ uploadedFile: result[0] });
-    // } catch (error) {
-    //   if (DocumentPicker.isCancel(error)) {
-    //     console.log('File selection was canceled');
-    //   } else {
-    //     console.error('File selection error:', error);
-    //   }
-    // }
+
   };
   console.log(uploadedFile, 'uploadedFile');
   const handleSubmit = () => {
