@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
 import Svg, { Circle, Path } from 'react-native-svg';
+import ExpenseBottomSheet from './ExpenseBottomSheet';
 import useExpenseStore from '../zustand/expenseStore';
 
 
