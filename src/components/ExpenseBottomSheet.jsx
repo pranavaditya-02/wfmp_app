@@ -14,8 +14,6 @@ import Downarrowicon from '../assets/icons/DownArrow';
 import CalendarIcon from '../assets/icons/CalenderIcon';
 import ShareIcon from '../assets/icons/Upload';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import * as DocumentPicker from 'react-native-document-picker';
-import useExpenseStore from '../zustand/expenseStore';
 import {pick} from 'react-native-document-picker';
 
 
@@ -46,7 +44,7 @@ const ExpenseBottomSheet = ({visible, onClose, onSubmit}) => {
   console.log(uploadedFile, 'uploadedFile');
   const handleSubmit = () => {
     if (!expenseName || !expenseAmount) {
-      alert('Please fill in all fields');
+      alert('Fill all fields');
       return;
     }
 
