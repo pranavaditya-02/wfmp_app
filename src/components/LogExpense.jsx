@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
 import Svg, { Circle, Path } from 'react-native-svg';
-import { useSelector, useDispatch } from 'react-redux';
-import ExpenseBottomSheet from './ExpenseBottomSheet';
-import { addExpense } from '../../redux/expenseSlice';
 import useExpenseStore from '../zustand/expenseStore';
 
 
